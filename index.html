@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusPomo</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="./media/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./media/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./media/icons/apple-touch-icon.png">
+    <link rel="shortcut icon" href="./media/icons/favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="./media/site.webmanifest">
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <audio id="alarm-sound1" src="./media/alarms/App Interface Button Notification 15.wav" preload="auto"></audio>
+    <audio id="alarm-sound2" src="./media/alarms/Bell Ding Notification.mp3" preload="auto"></audio>
+    <audio id="alarm-sound3" src="./media/alarms/ding-ascend-01.mp3" preload="auto"></audio>
+</head>
+
+<body>
+    <header>
+        <h3>Focus <strong>&</strong> do <i>it</i>.</h3>
+        <span><i>old ways won't acheive new goals.</i></span>
+    </header>
+
+    <div class="button">
+        <button class="b1">pomodoro</button>
+        <button class="b2">short break</button>
+        <button class="b3">long break</button>
+    </div>
+
+    <div class="timer"><span id="time">00:00</span></div>
+
+    <div class="sequence-container" style="display: none;">
+        <div class="sequence-title">Pomodoro Sequence:</div>
+        <div class="sequence-steps">
+            <div class="step pomodoro-step active">1</div>
+            <div class="step break-step">S</div>
+            <div class="step pomodoro-step">2</div>
+            <div class="step break-step">S</div>
+            <div class="step pomodoro-step">3</div>
+            <div class="step break-step">S</div>
+            <div class="step pomodoro-step">4</div>
+            <div class="step long-break-step">L</div>
+        </div>
+    </div>
+
+    <div class="button2">
+        <button class="b4">start</button>
+        <i class="fas fa-redo b5"></i>
+        <i class="fas fa-cog settings-icon b6"></i>
+        <i class="fas fa-expand fullscreen-btn b7"></i>
+    </div>
+
+    <div class="setting">
+        <div class="content">
+            <div class="setting-content">
+                <div class="items">
+                    <div class="setting-item">
+                        <label for="pom" class="pom">Pomodoro:</label>
+                        <input type="number" id="pom" min="0" max="90">
+                        minutes
+                    </div>
+
+                    <div class="setting-item">
+                        <label for="sh-break" class="sh-break">Short Break:</label>
+                        <input type="number" id="sh-break" min="0" max="90">
+                        minutes
+                    </div>
+
+                    <div class="setting-item">
+                        <label for="lg-break" class="lg-break">Long Break:</label>
+                        <input type="number" id="lg-break" min=0 max="90">
+                        minutes
+                    </div>
+
+                    <div class="Bground">
+                        <label for="BG">Themes:</label>
+                        <select name="backgrounds" id="BG">
+                            <option value="default">default theme</option>
+                            <option value="pic1">1</option>
+                            <option value="pic2">2</option>
+                            <option value="pic3">3</option>
+                            <option value="pic4">4</option>
+                            <option value="pic5">5</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-item">
+                        <label for="alarm-sound-select">Alarm Sound:</label>
+                        <select id="alarm-sound-select" class="sound-select">
+                            <option value="alarm-sound1">Alarm 1</option>
+                            <option value="alarm-sound2">Alarm 2</option>
+                            <option value="alarm-sound3">Alarm 3</option>
+                        </select>
+                    </div>
+
+                    <div class="item">
+                        <label for="auto-switch" class="switch-label">Pomodoro sequence:</label>
+                        <label class="switch">
+                            <input type="checkbox" id="auto-switch">
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="tip">(pomodoro -> sh-break -> repeat 4 times, then a lg-break)</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="setting-bt">
+                <button type="submit" class="save-bt">Save Changes</button>
+                <button type="reset" class="reset-bt">Reset</button>
+                <button type="button" class="exit-bt">Exit</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="./scripts.js"></script>
+</body>
+
+</html>
