@@ -36,13 +36,16 @@ function updateTimer() {
     let seconds = totalSeconds % 60;
     minutes = minutes < 10 ? '0' + minutes : minutes;
     seconds = seconds < 10 ? '0' + seconds : seconds;
-    timer.textContent = minutes + ':' + seconds;
+    const timeString = minutes + ':' + seconds;
+    timer.textContent = timeString;
+    document.title = "FocusPomo | " + timeString
 }
 
 function checkTimer() {
     if (totalSeconds <= 0) {
         pauseTimer();
         playAlarmSound();
+        document.title = "FocusPomo"
         if (autoSwitchEnabled) {
             handleAutoSwitch();
         }
@@ -133,6 +136,7 @@ function resetSequence() {
         step.classList.remove('completed', 'active');
     });
     sequenceSteps[0].classList.add('active');
+    document.title = "FocusPomo"
 }
 
 function playAlarmSound() {
@@ -183,6 +187,7 @@ window.addEventListener('DOMContentLoaded', function () {
     shortBreak.style.backgroundColor = "inherit";
 
     pauseTimer();
+    document.title = "FocusPomo"
 });
 
 pomodoro.addEventListener('click', function () {
@@ -266,12 +271,12 @@ reset.addEventListener('click', function () {
     const icon = this;
     icon.style.transition = 'none';
     icon.style.transform = 'rotate(0deg)';
-    
+
     requestAnimationFrame(() => {
         requestAnimationFrame(() => {
             icon.style.transition = 'transform .5s ease-in-out';
             icon.style.transform = 'rotate(360deg)';
-            
+
             setTimeout(() => {
                 icon.style.transition = 'none';
                 icon.style.transform = 'rotate(0deg)';
@@ -300,6 +305,8 @@ reset.addEventListener('click', function () {
     if (autoSwitchEnabled) {
         resetSequence();
     }
+
+    document.title = "FocusPomo"
 });
 
 fullScreenBtn.addEventListener('click', toggleFullscreen);
@@ -348,7 +355,7 @@ function modalSet() {
     setting.addEventListener('click', function () {
         settingModal.style.display = 'flex';
         setTimeout(() => {
-        settingModal.classList.add('active')           
+            settingModal.classList.add('active')
         }, 100);
 
         const savedSettings = JSON.parse(localStorage.getItem('timerSetting')) || timerSetting;
@@ -419,6 +426,7 @@ function closeModal() {
     setTimeout(() => {
         settingModal.style.display = 'none';
     }, 300);
+    document.title = "FocusPomo"
 }
 
 function applyNewSet() {
