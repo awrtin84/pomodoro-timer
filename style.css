@@ -158,20 +158,16 @@ header>span {
     visibility: visible;
 }
 
-.content {
-    background: inherit;
-    width: 30rem;
-    height: 35rem;
-    border: rgb(222, 214, 214) solid .1rem;
-    border-radius: 1rem;
-    padding: 1rem;
+.setting .content {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(20px);
+    width: 90%;
+    max-width: 500px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2rem;
     color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-        transform: translateY(-20px);
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    opacity: 0;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
 }
 
 .setting.active .content {
@@ -186,8 +182,7 @@ header>span {
 }
 
 .setting-item {
-    margin-bottom: 1rem;
-
+    margin-bottom: 1.5rem;
 }
 
 .setting-item #pom {
@@ -214,11 +209,28 @@ header>span {
     display: block;
 }
 
+.setting-item input[type="number"] {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    width: 60px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.setting-item input[type="number"]:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
 .setting-bt {
-    padding: 1rem;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: .5rem;
+    margin-top: 3rem;
 }
 
 button[type="submit"] {

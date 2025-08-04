@@ -75,6 +75,7 @@ function pauseTimer() {
     clearInterval(timerInterval);
     isRunning = false;
     startButton.textContent = 'start';
+    document.title = 'FocusPomo | Paused!'
 }
 
 function handleAutoSwitch() {
