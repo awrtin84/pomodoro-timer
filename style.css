@@ -540,3 +540,13 @@ input:checked+.slider:before {
     top: -5px;
     right: -5px;
 }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.timer span {
+    display: inline-block;
+    animation: fadeIn 0.5s ease-out;
+}
