@@ -45,7 +45,7 @@ function checkTimer() {
     if (totalSeconds <= 0) {
         pauseTimer();
         playAlarmSound();
-        document.title = "FocusPomo"
+        document.title = "FocusPomo | finished!"
         if (autoSwitchEnabled) {
             handleAutoSwitch();
         }
@@ -75,7 +75,6 @@ function pauseTimer() {
     clearInterval(timerInterval);
     isRunning = false;
     startButton.textContent = 'start';
-    document.title = 'FocusPomo | Paused!'
 }
 
 function handleAutoSwitch() {
