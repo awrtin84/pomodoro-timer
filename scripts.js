@@ -19,6 +19,8 @@ let alarmSelectBox = document.querySelector('#alarm-sound-select')
 let sequenceContainer = document.querySelector('.sequence-container');
 let sequenceSteps = document.querySelectorAll('.step');
 let currentStep = 0;
+let particlesInitialized = false;
+let isFullscreen = false;
 
 
 let timerInterval;
@@ -188,6 +190,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     pauseTimer();
     document.title = "FocusPomo"
+    initParticles();
 });
 
 pomodoro.addEventListener('click', function () {
@@ -316,8 +319,10 @@ function toggleFullscreen() {
         document.documentElement.requestFullscreen()
             .then(() => {
                 fullScreenBtn.classList.replace('fa-expand', 'fa-compress');
-                document.body.classList.add('is-fullscreen')
-                document.body.style.background = 'radial-gradient(circle, #1a1a2e 0%, #16213e 50%, #0f3460 100%)'
+                document.body.classList.add('is-fullscreen');
+                isFullscreen = true;
+
+                initParticles();
             })
             .catch(err => {
                 console.error("Fullscreen Error", err);
@@ -327,28 +332,25 @@ function toggleFullscreen() {
             .then(() => {
                 fullScreenBtn.classList.replace('fa-compress', 'fa-expand');
                 document.body.classList.remove('is-fullscreen');
-                document.body.style.background = 'url(./media/5630939.jpg)';
-                document.body.style.backgroundSize = 'cover';
-                document.body.style.backgroundRepeat = 'no-repeat';
-                document.body.style.backgroundPosition = 'center';
-                document.body.style.backgroundAttachment = 'fixed';
+                isFullscreen = false;
+
+
+                setTimeout(initParticles, 300);
             });
     }
 }
 
 document.addEventListener('fullscreenchange', () => {
     if (document.fullscreenElement) {
-        console.log('Enter fullscreen');
         document.body.classList.add('is-fullscreen');
+        isFullscreen = true;
     } else {
-        console.log('Exit fullscreen');
         document.body.classList.remove('is-fullscreen');
-        document.body.style.background = 'url(./media/5630939.jpg)';
-        document.body.style.backgroundSize = 'cover';
-        document.body.style.backgroundRepeat = 'no-repeat';
-        document.body.style.backgroundPosition = 'center';
-        document.body.style.backgroundAttachment = 'fixed';
+        isFullscreen = false;
     }
+
+
+    setTimeout(initParticles, 500);
 });
 
 function modalSet() {
@@ -462,6 +464,62 @@ function applyNewSet() {
     localStorage.setItem('timerSetting', JSON.stringify(timerSetting));
     pauseTimer();
 }
+
+function initParticles() {
+
+    if (window.pJSDom && window.pJSDom.length > 0) {
+        try {
+            window.pJSDom[0].pJS.fn.vendors.destroypJS();
+            window.pJSDom = [];
+        } catch (e) {
+            console.error("Error destroying particles", e);
+        }
+    }
+
+
+    const config = {
+        particles: {
+            number: { value: isFullscreen ? 150 : 80 },
+            color: { value: "#ffffff" },
+            shape: { type: "circle" },
+            opacity: { value: 0.7, random: true },
+            size: { value: isFullscreen ? 4 : 3, random: true },
+            line_linked: {
+                enable: true,
+                distance: isFullscreen ? 200 : 150,
+                color: "#ffffff",
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: isFullscreen ? 3 : 2,
+                direction: "none",
+                random: true,
+                out_mode: "out",
+                bounce: false
+            }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: { enable: true, mode: "grab" },
+                onclick: { enable: true, mode: "push" },
+                resize: true
+            },
+            modes: {
+                grab: { distance: 140, line_linked: { opacity: 1 } },
+                push: { particles_nb: 4 }
+            }
+        },
+        retina_detect: true
+    };
+
+
+    particlesJS('particles-js', config);
+    particlesInitialized = true;
+}
+
 
 updateTimer();
 modalSet();

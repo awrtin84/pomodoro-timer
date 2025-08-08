@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    background: url(./media/5630939.jpg);
+    background: url(./media/27093.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -17,11 +17,32 @@ header {
     padding: 3rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 header>h3 {
     font-size: 3rem;
+    position: relative;
 }
+
+header h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ff8a00, #e52e71);
+    animation: underlineGrow 1.5s ease-out forwards;
+    animation-delay: 2s;
+}
+
+@keyframes underlineGrow {
+    to {
+        width: 100%;
+    }
+}
+
 
 header>span {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -45,6 +66,7 @@ header>span {
     cursor: pointer;
     font-weight: bold;
     width: 8rem;
+    transition: background-color .3s ease, transform .3s ease, boxshadow .3s ease;
 }
 
 .button .b2 {
@@ -57,6 +79,7 @@ header>span {
     cursor: pointer;
     font-weight: bold;
     width: 8rem;
+    transition: background-color .3s ease, transform .3s ease, boxshadow .3s ease;
 }
 
 .button .b3 {
@@ -69,11 +92,15 @@ header>span {
     cursor: pointer;
     font-weight: bold;
     width: 8rem;
+    transition: background-color .3s ease, transform .3s ease, boxshadow .3s ease;
 }
 
 .b1:hover {
     background-color: white;
     color: inherit;
+    background-color: white;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px white, 0 0 14px white;
 }
 
 .buttonclick {
@@ -84,11 +111,17 @@ header>span {
 .b2:hover {
     background-color: white;
     color: inherit;
+    background-color: white;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px white, 0 0 14px white;
 }
 
 .b3:hover {
     background-color: white;
     color: inherit;
+    background-color: white;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px white, 0 0 14px white;
 }
 
 
@@ -118,11 +151,15 @@ header>span {
     width: 5rem;
     cursor: pointer;
     font-weight: bold;
+    transition: background-color .3s ease, transform .3s ease, boxshadow .3s ease;
 }
 
 .b4:hover {
     background-color: white;
     color: inherit;
+    background-color: white;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px white, 0 0 14px white;
 }
 
 .button2 i {
@@ -384,12 +421,11 @@ button[type="button"]:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #000000;
 }
 
 .is-fullscreen .timer {
-    transform: scale(2);
-    margin-bottom: 5rem;
+    font-size: 20rem;
+    margin-bottom: 1rem;
 }
 
 .is-fullscreen header {
@@ -400,27 +436,15 @@ button[type="button"]:hover {
     display: none;
 }
 
-/* .is-fullscreen .button2 {
-    transform: scale(1.1);
-    margin-top: 3rem;
-    display: flex;
-} */
-
-/* .is-fullscreen .button2 .b4,
-.is-fullscreen .button2 .b5,
-.is-fullscreen .button2 .b6 {
-    display: none;
-} */
-
 .is-fullscreen .button2 {
-    font-size: 1.5rem;
-    transition: all 0.3s ease;
-    margin-top: 1.5rem;
-    opacity: 20%;
+    font-size: 2rem;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+    z-index: 10;
 }
 
 .is-fullscreen .button2:hover {
-    opacity: 100%;
+    opacity: 1;
 }
 
 .tip {
@@ -542,6 +566,11 @@ input:checked+.slider:before {
     right: -5px;
 }
 
+.timer span {
+    display: inline-block;
+    animation: fadeIn 0.5s ease-out;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -554,7 +583,68 @@ input:checked+.slider:before {
     }
 }
 
-.timer span {
-    display: inline-block;
-    animation: fadeIn 0.5s ease-out;
+header,
+.button,
+.timer,
+.button2 {
+    opacity: 0;
+    animation: fadeInUp 2s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(1.4rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+header {
+    animation-delay: 0.8s;
+}
+
+.button {
+    animation-delay: 0.10s;
+}
+
+.timer {
+    animation-delay: 0.12s;
+}
+
+.button2 {
+    animation-delay: 0.14s;
+}
+
+
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.particles-minimal {
+    background: transparent;
+}
+
+.is-fullscreen .particles-container {
+    z-index: -1;
+    opacity: .8;
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
 }
