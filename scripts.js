@@ -14,8 +14,9 @@ let autoSwitchEnabled = false;
 let sessionCount = 0;
 let autoSwitchCheckbox = document.getElementById('auto-switch');
 let currentAlarmSound = document.querySelector('#alarm-sound1');
-let alarms = ['alarm-sound1', 'alarm-sound2', 'alarm-sound3']
-let alarmSelectBox = document.querySelector('#alarm-sound-select')
+let alarms = ['alarm-sound1', 'alarm-sound2', 'alarm-sound3'];
+let alarmSelectBox = document.querySelector('#alarm-sound-select');
+let currentTheme = localStorage.getItem('currentTheme') || 'theme1';
 let sequenceContainer = document.querySelector('.sequence-container');
 let sequenceSteps = document.querySelectorAll('.step');
 let currentStep = 0;
@@ -153,6 +154,22 @@ function playAlarmSound() {
     }
 }
 
+function changeTheme(themeName) {
+    const body = document.body;
+    console.log(`Changing theme to: ${themeName}, path: ./media/${themeName}.jpg`);
+    body.style.backgroundImage = `url('./media/${themeName}.jpg')`;
+    body.style.backgroundSize = 'cover';
+    body.style.backgroundRepeat = 'no-repeat';
+    body.style.backgroundPosition = 'center';
+    body.style.backgroundAttachment = 'fixed';
+    
+    currentTheme = themeName;
+    localStorage.setItem('currentTheme', themeName);
+    
+    document.getElementById('BG').value = themeName;
+}
+
+
 window.addEventListener('DOMContentLoaded', function () {
     const savedSettings = JSON.parse(localStorage.getItem('timerSetting'));
     if (savedSettings) {
@@ -163,6 +180,10 @@ window.addEventListener('DOMContentLoaded', function () {
     if (autoSwitchCheckbox) {
         autoSwitchCheckbox.checked = autoSwitchEnabled;
     }
+
+    const savedTheme = localStorage.getItem('currentTheme') || 'theme1';
+    document.getElementById('BG').value = savedTheme;
+    changeTheme(savedTheme);
 
     const savedAlarmId = localStorage.getItem('alarmSound');
     if (savedAlarmId) {
@@ -366,6 +387,8 @@ function modalSet() {
         document.getElementById('sh-break').value = savedSettings.shortBreak;
         document.getElementById('lg-break').value = savedSettings.longBreak;
 
+        document.getElementById('BG').value = currentTheme;
+
         const savedAlarmId = localStorage.getItem('alarmSound')
         if (savedAlarmId) {
             document.getElementById('alarm-sound-select').value = savedAlarmId
@@ -400,6 +423,10 @@ function modalSet() {
             }
         });
     }
+
+    document.getElementById('BG').addEventListener('change', function () {
+        changeTheme(this.value);
+    });
 
     exitBtn.addEventListener('click', function () {
         closeModal();
@@ -441,8 +468,12 @@ function applyNewSet() {
     let newShortBreak = Math.max(1, Math.min(30, parseInt(document.getElementById('sh-break').value))) || timerSetting.shortBreak;
     let newLongBreak = Math.max(1, Math.min(60, parseInt(document.getElementById('lg-break').value))) || timerSetting.longBreak;
 
-    currentAlarmSound = document.getElementById(alarmSelectBox.value)
-    localStorage.setItem('alarmSound', alarmSelectBox.value)
+    currentAlarmSound = document.getElementById(alarmSelectBox.value);
+    localStorage.setItem('alarmSound', alarmSelectBox.value);
+
+    const selectedTheme = document.getElementById('BG').value;
+    localStorage.setItem('currentTheme', selectedTheme);
+    changeTheme(selectedTheme);
 
     timerSetting = {
         pomodoro: newPomodoro,
@@ -479,21 +510,21 @@ function initParticles() {
 
     const config = {
         particles: {
-            number: { value: isFullscreen ? 150 : 80 },
+            number: { value: isFullscreen ? 110 : 100 },
             color: { value: "#ffffff" },
             shape: { type: "circle" },
             opacity: { value: 0.7, random: true },
             size: { value: isFullscreen ? 4 : 3, random: true },
             line_linked: {
                 enable: true,
-                distance: isFullscreen ? 200 : 150,
+                distance: 150,
                 color: "#ffffff",
-                opacity: 0.4,
+                opacity: 0.5,
                 width: 1
             },
             move: {
                 enable: true,
-                speed: isFullscreen ? 3 : 2,
+                speed: 2,
                 direction: "none",
                 random: true,
                 out_mode: "out",

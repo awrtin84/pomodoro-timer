@@ -3,13 +3,13 @@ html {
 }
 
 body {
-    background: url(./media/27093.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
     height: 100vh;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    transition: background-image 0.5s ease-in-out;
 }
 
 header {
