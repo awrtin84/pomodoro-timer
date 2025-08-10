@@ -510,7 +510,7 @@ function initParticles() {
 
     const config = {
         particles: {
-            number: { value: isFullscreen ? 110 : 100 },
+            number: { value: isFullscreen ? 140 : 130 },
             color: { value: "#ffffff" },
             shape: { type: "circle" },
             opacity: { value: 0.7, random: true },
@@ -524,7 +524,7 @@ function initParticles() {
             },
             move: {
                 enable: true,
-                speed: 2,
+                speed: .5,
                 direction: "none",
                 random: true,
                 out_mode: "out",
