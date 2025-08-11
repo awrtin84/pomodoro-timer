@@ -157,7 +157,7 @@ function playAlarmSound() {
 function changeTheme(themeName) {
     const body = document.body;
     console.log(`Changing theme to: ${themeName}, path: ./media/${themeName}.jpg`);
-    body.style.backgroundImage = `url('./media/${themeName}.jpg')`;
+    body.style.backgroundImage = `url('./media/themes/${themeName}.jpg')`;
     body.style.backgroundSize = 'cover';
     body.style.backgroundRepeat = 'no-repeat';
     body.style.backgroundPosition = 'center';
