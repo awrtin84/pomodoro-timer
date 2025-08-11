@@ -442,6 +442,8 @@ function modalSet() {
         document.getElementById('pom').value = 25;
         document.getElementById('sh-break').value = 5;
         document.getElementById('lg-break').value = 15;
+        document.getElementById('BG').value = 'theme1';
+        document.getElementById('alarm-sound-select').value = 'alarm-sound1'
     });
 
     saveBtn.addEventListener('click', function () {
