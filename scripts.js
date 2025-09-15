@@ -588,6 +588,17 @@ self.addEventListener('fetch', function(event) {
   );
 });
 
+// ثبت سرویس ورکر
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/pomodoro-timer/sw.js')
+      .then(function(registration) {
+        console.log('ServiceWorker registration successful');
+      }, function(err) {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+  });
+}
 
 updateTimer();
 modalSet();
