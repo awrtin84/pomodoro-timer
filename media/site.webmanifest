@@ -2,7 +2,7 @@
   "name": "FocusPomo Timer",
   "short_name": "FocusPomo",
   "description": "Smart Pomodoro Technique timer for productivity",
-  "start_url": "/index.html",
+  "start_url": "/pomodoro-timer/",
   "display": "standalone",
   "background_color": "#1a1a2e",
   "theme_color": "#0f3460",
